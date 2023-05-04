@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Forecast | Berlin</title>
+</head>
+<body>
+<h1>Weather Forecast | Berlin</h1>
+<table>
+    <tr>
+        <td>latitude</td>
+        <td id="latitude"></td>
+    </tr>
+    <tr>
+        <td>longitude</td>
+        <td id="longitude"></td>
+    </tr>
+    <tr>
+        <td>generationtime_ms</td>
+        <td id="generationtime_ms"></td>
+    </tr>
+    <tr>
+        <td>utc_offset_seconds</td>
+        <td id="utc_offset_seconds"></td>
+    </tr>
+    <tr>
+        <td>timezone</td>
+        <td id="timezone"></td>
+    </tr>
+    <tr>
+        <td>timezone_abbreviation</td>
+        <td id="timezone_abbreviation"></td>
+    </tr>
+    <tr>
+        <td>elevation</td>
+        <td id="elevation"></td>
+    </tr>
+    <tr>
+        <td>temperature</td>
+        <td id="temperature"></td>
+    </tr>
+    <tr>
+        <td>windspeed</td>
+        <td id="windspeed"></td>
+    </tr>
+    <tr>
+        <td>winddirection</td>
+        <td id="winddirection"></td>
+    </tr>
+    <tr>
+        <td>weathercode</td>
+        <td id="weathercode"></td>
+    </tr>
+    <tr>
+        <td>is_day</td>
+        <td id="is_day"></td>
+    </tr>
+    <tr>
+        <td>time</td>
+        <td id="time"></td>
+    </tr>
+</table>
+
+
+<script>
+    function getElement(id) {
+        return document.getElementById(id)
+    }
+
+    const url = "https://api.open-meteo.com/v1/forecast?latitude=52.5063862&longitude=13.0951045&current_weather=true";
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            getElement('latitude').innerText = data['latitude']
+            getElement('longitude').innerText = data['longitude']
+            getElement('generationtime_ms').innerText = data['generationtime_ms']
+            getElement('utc_offset_seconds').innerText = data['utc_offset_seconds']
+            getElement('timezone').innerText = data['timezone']
+            getElement('timezone_abbreviation').innerText = data['timezone_abbreviation']
+            getElement('elevation').innerText = data['elevation']
+            getElement('temperature').innerText = data['current_weather']['temperature']
+            getElement('windspeed').innerText = data['current_weather']['windspeed']
+            getElement('winddirection').innerText = data['current_weather']['winddirection']
+            getElement('weathercode').innerText = data['current_weather']['weathercode']
+            getElement('is_day').innerText = data['current_weather']['is_day']
+            getElement('time').innerText = data['current_weather']['time']
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+</script>
+</body>
+</html>
